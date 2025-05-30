@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"ragol-cli/core"
 	"ragol-cli/core/color"
+	"ragol-cli/core/command"
+	"ragol-cli/core/flag"
 )
 
-func main() {
+func testColors() {
 	red := color.Color{R: 255, G: 0, B: 0}
 	green := color.Color{R: 0, G: 255, B: 0}
 	blue := color.Color{R: 0, G: 0, B: 255}
@@ -32,4 +35,39 @@ func main() {
 	fmt.Println(formattedTest)
 	fmt.Println(formattedRedTest)
 	fmt.Println(formattedRGBTest)
+}
+
+func main() {
+	app := core.NewApp(
+		"test cli",
+		"0.0.1",
+		[]command.BaseCommand{
+			*command.NewCommand(
+				"test",
+				testCommand,
+				[]flag.Flag{
+					*flag.NewFlag("test", "t", false),
+				}),
+			*command.NewCommand(
+				"test2",
+				testCommand2,
+				[]flag.Flag{
+					*flag.NewFlag("test", "t", false),
+				}),
+		},
+	)
+	app.Run()
+}
+
+func testCommand(flags []flag.Flag) error {
+	fmt.Println("Testing command runs")
+	for _, f := range flags {
+		fmt.Println(f.Name)
+	}
+	return nil
+}
+
+func testCommand2(flags []flag.Flag) error {
+	fmt.Println("Testing command 2 runs")
+	return nil
 }

@@ -47,6 +47,6 @@ func (p *Parser) ParseCommand(input string, commands []command.BaseCommand) comm
 		}
 	}
 
-	// TODO: Default to the help command
-	return commands[0]
+	// Default to the help command (which is the last command)
+	return commands[len(commands)-1]
 }

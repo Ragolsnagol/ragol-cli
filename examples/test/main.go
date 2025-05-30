@@ -44,12 +44,14 @@ func main() {
 		[]command.BaseCommand{
 			*command.NewCommand(
 				"test",
+				"Test command",
 				testCommand,
 				[]flag.Flag{
 					*flag.NewFlag("test", "t", false),
 				}),
 			*command.NewCommand(
 				"test2",
+				"Test command 2",
 				testCommand2,
 				[]flag.Flag{
 					*flag.NewFlag("test", "t", false),

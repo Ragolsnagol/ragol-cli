@@ -47,18 +47,21 @@ func main() {
 				"Test command",
 				testCommand,
 				[]flag.Flag{
-					*flag.NewFlag("test", "t", false),
+					*flag.NewFlag("test", "t", true, false),
 				}),
 			*command.NewCommand(
 				"test2",
 				"Test command 2",
 				testCommand2,
 				[]flag.Flag{
-					*flag.NewFlag("test", "t", false),
+					*flag.NewFlag("test", "t", false, true),
 				}),
 		},
 	)
-	app.Run()
+	err := app.Run()
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func testCommand(flags []flag.Flag) error {
@@ -71,5 +74,8 @@ func testCommand(flags []flag.Flag) error {
 
 func testCommand2(flags []flag.Flag) error {
 	fmt.Println("Testing command 2 runs")
+	for _, f := range flags {
+		fmt.Printf("%v: %v\n", f.Name, f.Value)
+	}
 	return nil
 }

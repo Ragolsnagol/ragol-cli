@@ -36,13 +36,16 @@ func (a *App) Run() error {
 	c := a.Parser.ParseCommand(args[0], a.Commands)
 
 	// Pass in all arguments after the command
-	fs := a.Parser.ParseFlags(args[1:], c)
+	fs, err := a.Parser.ParseFlags(args[1:], c)
+	if err != nil {
+		return err
+	}
 
 	if len(fs) > 0 {
 		c.SetActiveFlags(fs)
 	}
 
-	err := c.Run()
+	err = c.Run()
 	if err != nil {
 		return err
 	}

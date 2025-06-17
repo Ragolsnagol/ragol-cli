@@ -1,6 +1,10 @@
 package command
 
-import "ragol-cli/core/flag"
+import (
+	"ragol-cli/core/action"
+	"ragol-cli/core/context"
+	"ragol-cli/core/flag"
+)
 
 type Command interface {
 	Run() error
@@ -10,12 +14,12 @@ type Command interface {
 type BaseCommand struct {
 	Name        string
 	HelpString  string
-	Action      func([]flag.Flag) error
+	Action      action.Action
 	Flags       []flag.Flag
 	ActiveFlags []flag.Flag
 }
 
-func NewCommand(name string, helpString string, action func([]flag.Flag) error, flags []flag.Flag) *BaseCommand {
+func NewCommand(name string, helpString string, action action.Action, flags []flag.Flag) *BaseCommand {
 	return &BaseCommand{
 		Name:       name,
 		HelpString: helpString,
@@ -24,10 +28,6 @@ func NewCommand(name string, helpString string, action func([]flag.Flag) error, 
 	}
 }
 
-func (c *BaseCommand) Run() error {
-	return c.Action(c.ActiveFlags)
-}
-
-func (c *BaseCommand) SetActiveFlags(flags []flag.Flag) {
-	c.ActiveFlags = flags
+func (c *BaseCommand) Run(ctx context.Context) error {
+	return c.Action.Action(ctx)
 }

@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"ragol-cli/core"
+	"ragol-cli/core/action"
 	"ragol-cli/core/color"
 	"ragol-cli/core/command"
+	"ragol-cli/core/context"
 	"ragol-cli/core/flag"
 )
 
@@ -45,14 +47,14 @@ func main() {
 			*command.NewCommand(
 				"test",
 				"Test command",
-				testCommand,
+				action.NewAction(testCommand),
 				[]flag.Flag{
 					*flag.NewFlag("test", "t", true, false),
 				}),
 			*command.NewCommand(
 				"test2",
 				"Test command 2",
-				testCommand2,
+				action.NewAction(testCommand2),
 				[]flag.Flag{
 					*flag.NewFlag("test", "t", false, true),
 				}),
@@ -64,17 +66,17 @@ func main() {
 	}
 }
 
-func testCommand(flags []flag.Flag) error {
+func testCommand(ctx context.Context) error {
 	fmt.Println("Testing command runs")
-	for _, f := range flags {
+	for _, f := range ctx.Flags {
 		fmt.Println(f.Name)
 	}
 	return nil
 }
 
-func testCommand2(flags []flag.Flag) error {
+func testCommand2(ctx context.Context) error {
 	fmt.Println("Testing command 2 runs")
-	for _, f := range flags {
+	for _, f := range ctx.Flags {
 		fmt.Printf("%v: %v\n", f.Name, f.Value)
 	}
 	return nil

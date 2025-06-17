@@ -1,6 +1,13 @@
 package action
 
+import "ragol-cli/core/context"
+
 type Action struct {
-	Args   []string
-	Action func()
+	Action func(ctx context.Context) error
+}
+
+func NewAction(action func(ctx context.Context) error) Action {
+	return Action{
+		Action: action,
+	}
 }

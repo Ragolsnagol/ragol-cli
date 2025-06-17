@@ -2,6 +2,7 @@ package core
 
 import (
 	"ragol-cli/core/command"
+	"ragol-cli/core/context"
 	"ragol-cli/core/parser"
 )
 
@@ -10,6 +11,7 @@ type App struct {
 	Version  string
 	Parser   parser.Parser
 	Commands []command.BaseCommand
+	Context  context.Context
 }
 
 func NewApp(name string, version string, commands []command.BaseCommand) *App {
@@ -21,6 +23,7 @@ func NewApp(name string, version string, commands []command.BaseCommand) *App {
 		Version:  version,
 		Parser:   *parser.NewParser(),
 		Commands: commands,
+		Context:  *context.NewContext(),
 	}
 }
 
@@ -30,7 +33,7 @@ func (a *App) Run() error {
 	if len(args) == 0 {
 		// Show the help command if nothing was supplied
 		help := a.Commands[len(a.Commands)-1]
-		return help.Run()
+		return help.Run(a.Context)
 	}
 
 	c := a.Parser.ParseCommand(args[0], a.Commands)
@@ -42,10 +45,10 @@ func (a *App) Run() error {
 	}
 
 	if len(fs) > 0 {
-		c.SetActiveFlags(fs)
+		a.Context.SetFlags(fs)
 	}
 
-	err = c.Run()
+	err = c.Run(a.Context)
 	if err != nil {
 		return err
 	}

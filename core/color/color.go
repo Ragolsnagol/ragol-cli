@@ -73,17 +73,12 @@ func ansi256ToRGB(code int) (r, g, b int) {
 			0: 0, 1: 0, 2: 0, 3: 0, 4: 128, 5: 128, 6: 128, 7: 192,
 			8: 128, 9: 128, 10: 128, 11: 128, 12: 255, 13: 255, 14: 255, 15: 255,
 		}[code%16]
-		if code >= 8 {
-			r += 63
-			g += 63
-			b += 63
-		}
 	} else if code < 232 {
 		// 6x6x6 color cube
 		code -= 16
-		r = (code / 36) * 51
-		g = ((code % 36) / 6) * 51
-		b = (code % 6) * 51
+		r = ((code / 36) % 6) * 255 / 5
+		g = ((code / 6) % 6) * 255 / 5
+		b = (code % 6) * 255 / 5
 	} else if code < 256 {
 		// Grayscale ramp
 		gray := (code-232)*10 + 8

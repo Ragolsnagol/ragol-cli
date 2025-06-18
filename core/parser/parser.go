@@ -39,6 +39,10 @@ func (p *Parser) ParseFlags(input []string, command command.BaseCommand) ([]flag
 func getFlags(input []string, command command.BaseCommand) []flag.Flag {
 	var fs []flag.Flag
 
+	if len(input) == 0 {
+		return fs
+	}
+
 	// Handle dash for flags
 	for i := 0; i < len(input); i++ {
 		s := input[i]

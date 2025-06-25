@@ -1,9 +1,9 @@
 package parser
 
 import (
+	"github.com/ragolsnagol/ragol-cli/core/command"
+	"github.com/ragolsnagol/ragol-cli/core/flag"
 	"os"
-	"ragol-cli/core/command"
-	"ragol-cli/core/flag"
 	"strings"
 )
 

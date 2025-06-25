@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"ragol-cli/core"
 	"ragol-cli/core/action"
 	"ragol-cli/core/command"
@@ -10,12 +11,13 @@ import (
 
 func main() {
 	app := core.NewApp(
-		"",
+		"ToDo cli",
 		"1.0",
 		[]command.BaseCommand{
 			addTodoCommand(),
 			deleteTodoCommand(),
 			markDoneCommand(),
+			getToDosCommand(),
 		})
 	err := app.Run()
 	if err != nil {
@@ -107,6 +109,35 @@ func markDoneAction() action.Action {
 		err = MarkDoneFromJson(task.Value.(string))
 		if err != nil {
 			return err
+		}
+
+		return nil
+	})
+
+	return a
+}
+
+func getToDosCommand() command.BaseCommand {
+	c := command.NewCommand(
+		"get",
+		"Get all todos",
+		getToDosAction(),
+		[]flag.Flag{},
+	)
+
+	return *c
+}
+
+func getToDosAction() action.Action {
+	a := action.NewAction(func(ctx context.Context) error {
+		todos, err := GetFromJson()
+		if err != nil {
+			return err
+		}
+
+		fmt.Println("ToDos:")
+		for i, todo := range todos {
+			fmt.Printf("%v: %v", i+1, todo.Task)
 		}
 
 		return nil

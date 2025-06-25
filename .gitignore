@@ -16,3 +16,6 @@
 
 # Goland files
 /.idea
+
+# ignore output of the todo_cli example
+todos.json

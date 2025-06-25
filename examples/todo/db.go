@@ -73,9 +73,10 @@ func MarkDoneFromJson(t string) error {
 		return err
 	}
 
-	for _, todo := range todos {
+	for i, todo := range todos {
 		if strings.EqualFold(todo.Task, t) {
 			todo.Done = true
+			todos[i] = todo
 			break
 		}
 	}

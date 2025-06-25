@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"ragol-cli/core"
-	"ragol-cli/core/action"
-	"ragol-cli/core/command"
-	"ragol-cli/core/context"
-	"ragol-cli/core/flag"
+	"github.com/ragolsnagol/ragol-cli/core"
+	"github.com/ragolsnagol/ragol-cli/core/action"
+	"github.com/ragolsnagol/ragol-cli/core/command"
+	"github.com/ragolsnagol/ragol-cli/core/context"
+	"github.com/ragolsnagol/ragol-cli/core/flag"
 )
 
 func main() {

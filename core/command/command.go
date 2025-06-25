@@ -1,9 +1,9 @@
 package command
 
 import (
-	"ragol-cli/core/action"
-	"ragol-cli/core/context"
-	"ragol-cli/core/flag"
+	"github.com/ragolsnagol/ragol-cli/core/action"
+	"github.com/ragolsnagol/ragol-cli/core/context"
+	"github.com/ragolsnagol/ragol-cli/core/flag"
 )
 
 type Command interface {

@@ -1,6 +1,6 @@
 package action
 
-import "ragol-cli/core/context"
+import "github.com/ragolsnagol/ragol-cli/core/context"
 
 type Action struct {
 	Action func(ctx context.Context) error

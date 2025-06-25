@@ -2,8 +2,8 @@ package command
 
 import (
 	"fmt"
-	"ragol-cli/core/action"
-	"ragol-cli/core/context"
+	"github.com/ragolsnagol/ragol-cli/core/action"
+	"github.com/ragolsnagol/ragol-cli/core/context"
 )
 
 func CreateHelpCommand(c []BaseCommand) BaseCommand {

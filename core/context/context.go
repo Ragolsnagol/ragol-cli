@@ -1,6 +1,6 @@
 package context
 
-import "ragol-cli/core/flag"
+import "github.com/ragolsnagol/ragol-cli/core/flag"
 
 type Context struct {
 	Flags []flag.Flag

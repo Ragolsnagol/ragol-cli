@@ -74,29 +74,29 @@ func TestParseFlags(t *testing.T) {
 		},
 		{
 			name:  "single flag without value",
-			input: []string{"-f"},
+			input: []string{"--f"},
 			command: command.BaseCommand{
 				Name: "test",
 				Flags: []flag.Flag{
-					{Name: "-f", UseValue: false},
+					{Name: "--f", UseValue: false},
 				},
 			},
 			expected: []flag.Flag{
-				{Name: "-f", UseValue: false},
+				{Name: "--f", UseValue: false},
 			},
 			expectError: false,
 		},
 		{
 			name:  "flag with value",
-			input: []string{"-f", "value"},
+			input: []string{"--f", "value"},
 			command: command.BaseCommand{
 				Name: "test",
 				Flags: []flag.Flag{
-					{Name: "-f", UseValue: true},
+					{Name: "--f", UseValue: true},
 				},
 			},
 			expected: []flag.Flag{
-				{Name: "-f", UseValue: true, Value: "value"},
+				{Name: "--f", UseValue: true, Value: "value"},
 			},
 			expectError: false,
 		},
@@ -106,7 +106,7 @@ func TestParseFlags(t *testing.T) {
 			command: command.BaseCommand{
 				Name: "test",
 				Flags: []flag.Flag{
-					{Name: "-r", Required: true},
+					{Name: "--r", Required: true},
 				},
 			},
 			expected:    nil,
@@ -118,11 +118,11 @@ func TestParseFlags(t *testing.T) {
 			command: command.BaseCommand{
 				Name: "test",
 				Flags: []flag.Flag{
-					{Name: "-flag", Alias: "-a"},
+					{Name: "--flag", Alias: "-a"},
 				},
 			},
 			expected: []flag.Flag{
-				{Name: "-flag", Alias: "-a"},
+				{Name: "--flag", Alias: "-a"},
 			},
 			expectError: false,
 		},

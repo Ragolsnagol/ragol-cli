@@ -26,12 +26,17 @@ func main() {
 }
 
 func addTodoCommand() command.BaseCommand {
+	f, err := flag.NewFlag("--task", "-t", true, true)
+	if err != nil {
+		panic(err)
+	}
+
 	c := command.NewCommand(
 		"add",
 		"Add a new todo",
 		addTodoAction(),
 		[]flag.Flag{
-			*flag.NewFlag("task", "t", true, true),
+			*f,
 		},
 	)
 	return *c
@@ -57,12 +62,17 @@ func addTodoAction() action.Action {
 }
 
 func deleteTodoCommand() command.BaseCommand {
+	f, err := flag.NewFlag("--task", "-t", true, true)
+	if err != nil {
+		panic(err)
+	}
+
 	c := command.NewCommand(
 		"delete",
 		"Delete a todo using the task name",
 		deleteTodoAction(),
 		[]flag.Flag{
-			*flag.NewFlag("task", "t", true, true),
+			*f,
 		},
 	)
 
@@ -87,12 +97,17 @@ func deleteTodoAction() action.Action {
 }
 
 func markDoneCommand() command.BaseCommand {
+	f, err := flag.NewFlag("--task", "-t", true, true)
+	if err != nil {
+		panic(err)
+	}
+
 	c := command.NewCommand(
 		"done",
 		"Mark a task as done",
 		markDoneAction(),
 		[]flag.Flag{
-			*flag.NewFlag("task", "t", true, true),
+			*f,
 		},
 	)
 

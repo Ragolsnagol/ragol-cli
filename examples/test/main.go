@@ -40,6 +40,15 @@ func testColors() {
 }
 
 func main() {
+	f, err := flag.NewFlag("--task", "-t", true, true)
+	if err != nil {
+		panic(err)
+	}
+	f2, err := flag.NewFlag("--test", "-t", false, true)
+	if err != nil {
+		panic(err)
+	}
+
 	app := core.NewApp(
 		"test cli",
 		"0.0.1",
@@ -49,18 +58,18 @@ func main() {
 				"Test command",
 				action.NewAction(testCommand),
 				[]flag.Flag{
-					*flag.NewFlag("test", "t", true, false),
+					*f,
 				}),
 			*command.NewCommand(
 				"test2",
 				"Test command 2",
 				action.NewAction(testCommand2),
 				[]flag.Flag{
-					*flag.NewFlag("test", "t", false, true),
+					*f2,
 				}),
 		},
 	)
-	err := app.Run()
+	err = app.Run()
 	if err != nil {
 		fmt.Println(err)
 	}

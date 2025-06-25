@@ -43,7 +43,6 @@ func getFlags(input []string, command command.BaseCommand) []flag.Flag {
 		return fs
 	}
 
-	// Handle dash for flags
 	for i := 0; i < len(input); i++ {
 		s := input[i]
 
